@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
+    public Animator animator;
 
     private Rigidbody2D rigidBody;
-    private Animator animator;
 
 
     // x, y ÀÔ·Â°ª
@@ -49,11 +50,15 @@ public class Player : MonoBehaviour
     private bool isAirborne;
     private bool isWallDetected;
 
+    [Header("Attack")]
+    public bool isAttacking = false;
+
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        instance = this;
     }
 
     private void OnDrawGizmos()
@@ -175,6 +180,12 @@ public class Player : MonoBehaviour
                 RequestBufferJump();
             }
         }
+        if(Input.GetKeyDown(KeyCode.Z)) 
+        {
+            if(!isAirborne && !isAttacking){ 
+                Attack();
+            }
+        }
     }
 
     private void RequestBufferJump()
@@ -272,11 +283,20 @@ public class Player : MonoBehaviour
         rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocityX, rigidBody.linearVelocityY * yModifier);
     }
 
+    private void Attack()
+    {
+        isAttacking = true;
+    }
+
     private void HandleMovement()
     {
         rigidBody.AddForce(Physics.gravity * rigidBody.mass);
         if(isWallDetected)
         {
+            return;
+        }
+        if(isAttacking) {
+            rigidBody.linearVelocity = new Vector2(0, rigidBody.linearVelocityY);
             return;
         }
         
