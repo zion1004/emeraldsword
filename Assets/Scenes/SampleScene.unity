@@ -1772,7 +1772,7 @@ GameObject:
   - component: {fileID: 736608875}
   - component: {fileID: 736608876}
   - component: {fileID: 736608878}
-  - component: {fileID: 736608877}
+  - component: {fileID: 736608879}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1823,32 +1823,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &736608877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736608873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff7b846b82e10264e872d69c27c92a45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 9
-  jumpForce: 12
-  doubleJumpForce: 12
-  bufferJumpWindow: 0.3
-  coyoteJumpWindow: 0.3
-  wallJumpDuration: 0.3
-  wallJumpForce: {x: 4, y: 4}
-  knockbackDuration: 1
-  knockbackPower: {x: 2, y: 2}
-  groundCheckDistance: 1.34
-  wallCheckDistance: 0.6
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!61 &736608878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1895,6 +1869,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7057924, y: 1.8122439}
   m_EdgeRadius: 0
+--- !u!114 &736608879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736608873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff7b846b82e10264e872d69c27c92a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 9
+  jumpForce: 12
+  doubleJumpForce: 12
+  bufferJumpWindow: 0.1
+  coyoteJumpWindow: 0.1
+  wallJumpForce: {x: 12, y: 12}
+  knockbackDuration: 1
+  knockbackPower: {x: 0.1, y: 0.1}
+  groundCheckDistance: 1.34
+  wallCheckDistance: 0.6
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1195276495
 GameObject:
   m_ObjectHideFlags: 0
