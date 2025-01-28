@@ -290,7 +290,6 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        rigidBody.AddForce(Physics.gravity * rigidBody.mass);
         if(isWallDetected)
         {
             return;
