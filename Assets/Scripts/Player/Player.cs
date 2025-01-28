@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
             rigidBody.transform.position = new Vector3(-27.38f, 7.7f, 0f);
         }
 
-        // Application.targetFrameRate = 12;
+        Application.targetFrameRate = 120;
 
         // 플레이어 상태 업데이트
         UpdateAirborneStatus();
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Z)) 
         {
-            if(!isAirborne && !isAttacking){ 
+            if(!isAttacking){ 
                 Attack();
             }
         }
@@ -290,13 +290,8 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        rigidBody.AddForce(Physics.gravity * rigidBody.mass);
         if(isWallDetected)
         {
-            return;
-        }
-        if(isAttacking) {
-            rigidBody.linearVelocity = new Vector2(0, rigidBody.linearVelocityY);
             return;
         }
         
@@ -310,7 +305,7 @@ public class Player : MonoBehaviour
             }
             return;
         }
-
+    
         rigidBody.linearVelocity = new Vector2(xInput * moveSpeed, rigidBody.linearVelocityY);
     }
 
