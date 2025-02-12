@@ -1638,8 +1638,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 505092124}
-  intro: {fileID: 8300000, guid: b3783c75d897d0649b0be3cd86dc02aa, type: 3}
-  background: {fileID: 8300000, guid: bc1c72b0db8f9a840a2fcd8c2a2999e5, type: 3}
+  intro: {fileID: 0}
+  background: {fileID: 0}
 --- !u!4 &505092126
 Transform:
   m_ObjectHideFlags: 0
@@ -1904,7 +1904,7 @@ Transform:
   m_GameObject: {fileID: 736608873}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.38, y: 7.7, z: 0}
+  m_LocalPosition: {x: -11.55, y: -0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2010,7 +2010,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  isAttacking: 0
+  attackCooldown: 1
+  maxComboCount: 2
 --- !u!1 &1195276495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,8 +2038,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195276495}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.66, y: -7.31, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.52, y: 0.044, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2147,7 +2148,7 @@ Transform:
   m_GameObject: {fileID: 1384721676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.21, y: 1.2665944, z: 5}
+  m_LocalPosition: {x: 18.21, y: 1.19, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4433,7 +4434,7 @@ Transform:
   m_GameObject: {fileID: 2082505201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -28.12, y: 1.2665944, z: 5}
+  m_LocalPosition: {x: -29.67, y: 1.23, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

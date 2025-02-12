@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static Player instance;
-    public Animator animator;
 
+    public Animator animator;
     private Rigidbody2D rigidBody;
 
 
@@ -51,14 +50,17 @@ public class Player : MonoBehaviour
     private bool isWallDetected;
 
     [Header("Attack")]
-    public bool isAttacking = false;
+    [SerializeField] private float attackCooldown = 0.3f;  // Time between attacks
+    [SerializeField] private int maxComboCount = 2;        // Number of attacks in combo
+    private int currentCombo = 0;
+    private float lastAttackTime;
+    private bool isAttacking;
 
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        instance = this;
     }
 
     private void OnDrawGizmos()
@@ -89,6 +91,7 @@ public class Player : MonoBehaviour
 
         // 플레이어 상태 업데이트
         UpdateAirborneStatus();
+        UpdateAttackCooldown();
 
         if(isKnocked)
         {
@@ -172,18 +175,22 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            if(!isAirborne || canDoubleJump)
-            { 
-                HandleJump();
+            if(!isAttacking){
+                if(!isAirborne || canDoubleJump)
+                {
+                    HandleJump();
+                }
+                else
+                {
+                    RequestBufferJump();
+                }
             }
-            else { 
-                RequestBufferJump();
-            }
+
         }
         if(Input.GetKeyDown(KeyCode.Z)) 
-        {
-            if(!isAirborne && !isAttacking){ 
-                Attack();
+        { 
+            if(isGrounded){ 
+                HandleAttack();
             }
         }
     }
@@ -283,9 +290,48 @@ public class Player : MonoBehaviour
         rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocityX, rigidBody.linearVelocityY * yModifier);
     }
 
-    private void Attack()
+    void HandleAttack()
     {
-        isAttacking = true;
+        if(Time.time - lastAttackTime > attackCooldown)
+        {
+            currentCombo = 0;  // Reset combo if cooldown exceeded
+        }
+        if(currentCombo == 0){
+            currentCombo = 1;
+            lastAttackTime = Time.time;
+            animator.SetTrigger("Attack1");
+            PerformAttack(currentCombo);
+            isAttacking = true;
+        }
+        else if(currentCombo == 1){
+            currentCombo = 2;
+            lastAttackTime = Time.time;
+            animator.SetTrigger("Attack2");
+            PerformAttack(currentCombo);
+            isAttacking = true;
+        }
+    }
+
+    private void PerformAttack(int comboStep)
+    {
+        switch(comboStep)
+        {
+            case 1:
+                Debug.Log("Attack 1");
+                break;
+            case 2:
+                Debug.Log("Attack 2");
+                break;
+
+        }
+    }
+
+    private void UpdateAttackCooldown()
+    {
+        if(isAttacking && Time.time - lastAttackTime > 0.3f) // Simulating attack duration
+        {
+            isAttacking = false;
+        }
     }
 
     private void HandleMovement()
@@ -294,11 +340,12 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        if(isAttacking) {
+        if(isAttacking)
+        {
             rigidBody.linearVelocity = new Vector2(0, rigidBody.linearVelocityY);
             return;
         }
-        
+
         if(isWallJumping)
         {
             if(isGrounded)
